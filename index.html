@@ -6,28 +6,85 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
+      if (profile.active) {
+        if (!reason) {
+          return "confirm status manually";
+        }
+         profile.active = false;
+         profile.reason = reason;
+       } else {
+         profile.active = true;
+         delete profile.reason;
+        }
+         return profile;
+      }
 
-    }
 
     // 👉 CHALLENGE 2
-    function mineSweeper(grid, x, y) {
-
+  function mineSweeper(grid, x, y) {
+    if (x < 1 || x > 3 || y < 1 || y > 3) {
+      return "invalid coordinates";
+      } else {
+        let color = grid[y-1][x-1];
+      if (color === '🟥') {
+          return "🟥 💀";
+      } else if (color === '🟦') {
+          return "🟦 🥳";
+      }
+     } 
     }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
-
+      for (let prop in obj) {
+        if (prop.length > 9) {
+          return "shorten all prop names to 9 chars or less"
+        }
+        if (obj[prop] === null) {
+          delete obj[prop];
+        }
+        if (obj[prop] === 0) {
+          obj[prop] = false;
+        } else if (obj[prop] === 1){
+          obj[prop] = true;
+        }
+      }
+       return obj;
     }
+
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
-
-    }
+      const words = text.split(" ");
+      for (let i = 0; i < words.length; i++) {
+        const newWord = words[i];
+        if (forbidden.includes(newWord)) {
+            words[i] = "x".repeat(newWord.length);
+        }
+       }
+         const fixedText = words.join(" ");
+          return fixedText;
+        }
+    
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
-
+    let partOne = ""
+    let partTwo = ""
+    let partThree = ""
+    for (var i = 0; i < num.length; i++) {
+        if (i < 3) {
+            partOne += num[i].toString()
+        } else if (i >= 3 && i < 6) {
+            partTwo += num[i].toString()
+        } else if (i >= 6) {
+            partThree += num[i].toString()
+        }
     }
+    return `[(${partOne}) ${partTwo}-${partThree}]`
+  }  
+
+    
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
